@@ -4,8 +4,9 @@ node_modules
 # logs
 yarn-error.log
 
-# dist
-/public/build/
-
 # for Mac
 .DS_Store
+
+# dist
+dist
+build
