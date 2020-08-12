@@ -955,7 +955,7 @@
     "@rollup/pluginutils" "^3.0.1"
     resolve "^1.14.1"
 
-"@rollup/pluginutils@^3.0.1", "@rollup/pluginutils@^3.0.8", "@rollup/pluginutils@^3.1.0":
+"@rollup/pluginutils@^3.0.0", "@rollup/pluginutils@^3.0.1", "@rollup/pluginutils@^3.0.8", "@rollup/pluginutils@^3.1.0":
   version "3.1.0"
   resolved "https://registry.npm.taobao.org/@rollup/pluginutils/download/@rollup/pluginutils-3.1.0.tgz?cache=0&sync_timestamp=1591365388348&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40rollup%2Fpluginutils%2Fdownload%2F%40rollup%2Fpluginutils-3.1.0.tgz#706b4524ee6dc8b103b3c995533e5ad680c02b9b"
   integrity sha1-cGtFJO5tyLEDs8mVUz5a1oDAK5s=
@@ -1180,6 +1180,13 @@
     "@types/express-serve-static-core" "*"
     "@types/mime" "*"
 
+"@wizardoc/injector@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.npm.taobao.org/@wizardoc/injector/download/@wizardoc/injector-1.2.3.tgz#5d62eb6a7ae4f4dd8db7ba177219247b44d38a63"
+  integrity sha1-XWLranrk9N2Nt7oXchkke0TTimM=
+  dependencies:
+    reflect-metadata "^0.1.13"
+
 "@zkochan/cmd-shim@^3.1.0":
   version "3.1.0"
   resolved "https://registry.npm.taobao.org/@zkochan/cmd-shim/download/@zkochan/cmd-shim-3.1.0.tgz#2ab8ed81f5bb5452a85f25758eb9b8681982fd2e"
@@ -1397,6 +1404,11 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.npm.taobao.org/asynckit/download/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha1-x57Zf380y48robyXkLzDZkdLS3k=
+
+at-least-node@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npm.taobao.org/at-least-node/download/at-least-node-1.0.0.tgz#602cd4b46e844ad4effc92a8011a3c46e0238dc2"
+  integrity sha1-YCzUtG6EStTv/JKoARo8RuAjjcI=
 
 atob-lite@^2.0.0:
   version "2.0.0"
@@ -1637,6 +1649,19 @@ camelcase@^5.0.0, camelcase@^5.3.1:
   version "5.3.1"
   resolved "https://registry.npm.taobao.org/camelcase/download/camelcase-5.3.1.tgz#e3c9b31569e106811df242f715725a1f4c494320"
   integrity sha1-48mzFWnhBoEd8kL3FXJaH0xJQyA=
+
+carbon-components-svelte@^0.9.4:
+  version "0.9.4"
+  resolved "https://registry.npm.taobao.org/carbon-components-svelte/download/carbon-components-svelte-0.9.4.tgz#0a2b42270ee2f91b5865d4debc0193d8527a5371"
+  integrity sha1-CitCJw7i+RtYZdTevAGT2FJ6U3E=
+  dependencies:
+    carbon-icons-svelte "^10.14.0"
+    flatpickr "4.6.3"
+
+carbon-icons-svelte@^10.14.0:
+  version "10.15.0"
+  resolved "https://registry.npm.taobao.org/carbon-icons-svelte/download/carbon-icons-svelte-10.15.0.tgz#2e4a7f7e8c71c260239c8210d0506d023efc824f"
+  integrity sha1-Lkp/foxxwmAjnIIQ0FBtAj78gk8=
 
 caseless@~0.12.0:
   version "0.12.0"
@@ -2544,6 +2569,11 @@ find-up@^4.1.0:
     locate-path "^5.0.0"
     path-exists "^4.0.0"
 
+flatpickr@4.6.3:
+  version "4.6.3"
+  resolved "https://registry.npm.taobao.org/flatpickr/download/flatpickr-4.6.3.tgz#15a8b76b6e34e3a072861250503a5995b9d3bc60"
+  integrity sha1-Fai3a24046ByhhJQUDpZlbnTvGA=
+
 flush-write-stream@^1.0.0:
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/flush-write-stream/download/flush-write-stream-1.1.1.tgz#8dd7d873a1babc207d94ead0c2e0e44276ebf2e8"
@@ -2604,6 +2634,16 @@ fs-extra@^8.1.0:
     graceful-fs "^4.2.0"
     jsonfile "^4.0.0"
     universalify "^0.1.0"
+
+fs-extra@^9.0.0:
+  version "9.0.1"
+  resolved "https://registry.npm.taobao.org/fs-extra/download/fs-extra-9.0.1.tgz#910da0062437ba4c39fedd863f1675ccfefcb9fc"
+  integrity sha1-kQ2gBiQ3ukw5/t2GPxZ1zP78ufw=
+  dependencies:
+    at-least-node "^1.0.0"
+    graceful-fs "^4.2.0"
+    jsonfile "^6.0.1"
+    universalify "^1.0.0"
 
 fs-minipass@^1.2.5:
   version "1.2.7"
@@ -3446,6 +3486,15 @@ jsonfile@^4.0.0:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
+jsonfile@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.npm.taobao.org/jsonfile/download/jsonfile-6.0.1.tgz?cache=0&sync_timestamp=1583593905130&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fjsonfile%2Fdownload%2Fjsonfile-6.0.1.tgz#98966cba214378c8c84b82e085907b40bf614179"
+  integrity sha1-mJZsuiFDeMjIS4LghZB7QL9hQXk=
+  dependencies:
+    universalify "^1.0.0"
+  optionalDependencies:
+    graceful-fs "^4.1.6"
+
 jsonparse@^1.2.0:
   version "1.3.1"
   resolved "https://registry.npm.taobao.org/jsonparse/download/jsonparse-1.3.1.tgz#3f4dae4a91fac315f71062f8521cc239f1366280"
@@ -3934,7 +3983,7 @@ mime-types@^2.1.12, mime-types@^2.1.18, mime-types@~2.1.19, mime-types@~2.1.24:
   dependencies:
     mime-db "1.44.0"
 
-mime@^2.3.1:
+mime@>=2.0.3, mime@^2.3.1:
   version "2.4.6"
   resolved "https://registry.npm.taobao.org/mime/download/mime-2.4.6.tgz?cache=0&sync_timestamp=1590596637243&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmime%2Fdownload%2Fmime-2.4.6.tgz#e5b407c90db442f2beb5b162373d07b69affa4d1"
   integrity sha1-5bQHyQ20QvK+tbFiNz0Htpr/pNE=
@@ -4363,6 +4412,11 @@ only@~0.0.2:
   version "0.0.2"
   resolved "https://registry.npm.taobao.org/only/download/only-0.0.2.tgz#2afde84d03e50b9a8edc444e30610a70295edfb4"
   integrity sha1-Kv3oTQPlC5qO3EROMGEKcCle37Q=
+
+opener@1:
+  version "1.5.1"
+  resolved "https://registry.npm.taobao.org/opener/download/opener-1.5.1.tgz#6d2f0e77f1a0af0032aca716c2c1fbb8e7e8abed"
+  integrity sha1-bS8Od/GgrwAyrKcWwsH7uOfoq+0=
 
 "opts@>= 1.2.0":
   version "2.0.0"
@@ -4948,6 +5002,11 @@ redent@^3.0.0:
     indent-string "^4.0.0"
     strip-indent "^3.0.0"
 
+reflect-metadata@^0.1.13:
+  version "0.1.13"
+  resolved "https://registry.npm.taobao.org/reflect-metadata/download/reflect-metadata-0.1.13.tgz#67ae3ca57c972a2aa1642b10fe363fe32d49dc08"
+  integrity sha1-Z648pXyXKiqhZCsQ/jY/4y1J3Ag=
+
 regex-not@^1.0.0, regex-not@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npm.taobao.org/regex-not/download/regex-not-1.0.2.tgz#1f4ece27e00b0b65e0247a6810e6a85d83a5752c"
@@ -5076,12 +5135,28 @@ rimraf@^2.5.4, rimraf@^2.6.2, rimraf@^2.6.3:
   dependencies:
     glob "^7.1.3"
 
+rollup-plugin-css-only@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.npm.taobao.org/rollup-plugin-css-only/download/rollup-plugin-css-only-2.1.0.tgz#b9e8505eb01c5257b5eab65bd51eec9050bed9a3"
+  integrity sha1-uehQXrAcUle16rZb1R7skFC+2aM=
+  dependencies:
+    "@rollup/pluginutils" "^3.0.0"
+    fs-extra "^9.0.0"
+
 rollup-plugin-livereload@^1.0.0:
   version "1.3.0"
   resolved "https://registry.npm.taobao.org/rollup-plugin-livereload/download/rollup-plugin-livereload-1.3.0.tgz#8da90df13df6502b9d982997d6ac871092f15fdd"
   integrity sha1-jakN8T32UCudmCmX1qyHEJLxX90=
   dependencies:
     livereload "^0.9.1"
+
+rollup-plugin-serve@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.npm.taobao.org/rollup-plugin-serve/download/rollup-plugin-serve-1.0.3.tgz#409a52303efcd78911834a37db5835b76a2f8e61"
+  integrity sha1-QJpSMD7814kRg0o321g1t2ovjmE=
+  dependencies:
+    mime ">=2.0.3"
+    opener "1"
 
 rollup-plugin-svelte@^5.0.3:
   version "5.2.3"
@@ -5680,6 +5755,11 @@ svelte-preprocess@~3.9.11:
     detect-indent "^6.0.0"
     strip-indent "^3.0.0"
 
+svelte-routing@^1.4.2:
+  version "1.4.2"
+  resolved "https://registry.npm.taobao.org/svelte-routing/download/svelte-routing-1.4.2.tgz#291160b537c9c73e711731eb099c48bb24cc3419"
+  integrity sha1-KRFgtTfJxz5xFzHrCZxIuyTMNBk=
+
 svelte2tsx@*:
   version "0.1.78"
   resolved "https://registry.npm.taobao.org/svelte2tsx/download/svelte2tsx-0.1.78.tgz#06eb15780dd92cd2bc61b6f61be6ccd4a7a8aea4"
@@ -5986,6 +6066,11 @@ universalify@^0.1.0:
   version "0.1.2"
   resolved "https://registry.npm.taobao.org/universalify/download/universalify-0.1.2.tgz#b646f69be3942dabcecc9d6639c80dc105efaa66"
   integrity sha1-tkb2m+OULavOzJ1mOcgNwQXvqmY=
+
+universalify@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npm.taobao.org/universalify/download/universalify-1.0.0.tgz#b61a1da173e8435b2fe3c67d29b9adf8594bd16d"
+  integrity sha1-thodoXPoQ1sv48Z9Kbmt+FlL0W0=
 
 unpipe@1.0.0:
   version "1.0.0"
