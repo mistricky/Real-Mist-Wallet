@@ -1,14 +1,8 @@
 import Router from "koa-router";
 import { Context } from "../../response/res";
-import { extract } from "@wizardoc/injector";
-import { Ethereum } from "../../services";
+import { handleCreateUser } from "../../controllers/user/create-user";
+import { recoverUser } from "../../controllers/user/recover-user";
 
 export function userRoutes(router: Router<any, Context>) {
-  const eth = extract(Ethereum);
-
-  router.post("/user", (ctx) => {
-    console.info(eth.createAccount());
-
-    ctx.success("hello");
-  });
+  router.post("/user", handleCreateUser).put("/user/recover", recoverUser);
 }
