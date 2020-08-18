@@ -1,0 +1,6 @@
+{
+  "baseUrl": "localhost",
+  "port": 9999,
+  "protocol": "http",
+  "mode": "prod"
+}

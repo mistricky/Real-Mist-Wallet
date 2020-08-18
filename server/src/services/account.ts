@@ -4,13 +4,23 @@ import { DB } from "../db/connections";
 import { User } from "../models/user.model";
 import { Eth } from "web3-eth";
 import { HTTPResponseError } from "../response/error";
+import Web3 from "web3";
 
 export class Account {
   private _ETHAccount: ETHAccount | undefined;
+  private _RPC: Eth | undefined;
   private _keyStore: any;
   private passwordPromptInfo = "";
 
   private registry = extract(DB).conn.getRepository(User);
+
+  private get RPC() {
+    if (!this._RPC) {
+      throw new Error("The RPC is undefined.");
+    }
+
+    return this._RPC;
+  }
 
   private get ETHAccount() {
     if (!this._ETHAccount) {
@@ -31,6 +41,12 @@ export class Account {
     return this._password;
   }
 
+  async getBalance() {
+    const balance = await this.RPC.getBalance(this.address);
+
+    return Web3.utils.fromWei(balance);
+  }
+
   get address() {
     return this.ETHAccount.address;
   }
@@ -47,6 +63,7 @@ export class Account {
   create(RPC: Eth) {
     this._ETHAccount = RPC.accounts.create(this.password);
     this._keyStore = this._ETHAccount.encrypt(this.password);
+    this._RPC = RPC;
 
     return this.ETHAccount;
   }
@@ -61,10 +78,10 @@ export class Account {
       );
     }
 
-    let unlockedAccount: ETHAccount;
+    this._RPC = RPC;
 
     try {
-      unlockedAccount = RPC.accounts.decrypt(
+      this._ETHAccount = RPC.accounts.decrypt(
         JSON.parse(users[0].keyStore),
         this.password
       );
@@ -72,7 +89,7 @@ export class Account {
       throw new HTTPResponseError(`Password mistake`);
     }
 
-    return unlockedAccount;
+    return this;
   }
 
   save() {

@@ -1,8 +1,18 @@
-import Router from "koa-router";
+import type Router from "koa-router";
 import { Context } from "../../response/res";
 import { handleCreateUser } from "../../controllers/user/create-user";
 import { recoverUser } from "../../controllers/user/recover-user";
+import { getUserInfos } from "../../controllers/user/get-user-infos";
+import { extract } from "@wizardoc/injector";
+import { Auth } from "../../services/auth";
+import { HTTPResponseError } from "../../response/error";
 
 export function userRoutes(router: Router<any, Context>) {
-  router.post("/user", handleCreateUser).put("/user/recover", recoverUser);
+  const auth = extract(Auth);
+
+  router
+    .prefix("/user")
+    .post("/", handleCreateUser)
+    .put("/recover", recoverUser)
+    .get("/", auth.validation, getUserInfos);
 }

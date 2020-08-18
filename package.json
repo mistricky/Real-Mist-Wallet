@@ -12,5 +12,9 @@
       "client",
       "server"
     ]
+  },
+  "scripts": {
+    "client:dev": "cd ./client && yarn dev",
+    "server:dev": "cd ./server && yarn watch && yarn start"
   }
 }

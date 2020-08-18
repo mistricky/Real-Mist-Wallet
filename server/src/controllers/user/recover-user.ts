@@ -14,7 +14,7 @@ export async function recoverUser(ctx: Context, next: any) {
   try {
     await extract(Ethereum).unlockAccount(idName, password);
 
-    ctx.success({ data: extract(Auth).signToken(idName) });
+    ctx.success({ token: extract(Auth).signToken(idName) });
   } catch (e) {
     ctx.error(e);
   }

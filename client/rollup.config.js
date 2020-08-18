@@ -9,6 +9,7 @@ import alias from "@rollup/plugin-alias";
 import Path from "path";
 import server from "rollup-plugin-serve";
 import css from "rollup-plugin-css-only";
+import json from "@rollup/plugin-json";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -46,6 +47,7 @@ export default {
     file: "public/build/bundle.js",
   },
   plugins: [
+    json(),
     css({ output: "public/build/bundle.external.css" }),
 
     alias({

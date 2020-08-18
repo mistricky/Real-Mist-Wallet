@@ -1,6 +1,6 @@
 <style>
-  :global(body) {
+  /* :global(body) {
     background: #131516;
     color: white;
-  }
+  } */
 </style>

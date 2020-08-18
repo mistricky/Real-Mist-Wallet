@@ -1,15 +1,39 @@
+import "reflect-metadata";
 import Koa from "koa";
 import Router from "koa-router";
 import { registerRoutes } from "./router";
 import { Context, overrideContext } from "./response/res";
+import BodyParser from "koa-bodyparser";
+import cors from "@koa/cors";
+import { extract } from "@wizardoc/injector";
+import { DB } from "./db/connections";
 
 const app = new Koa<any, Context>();
 const router = new Router<any, Context>();
+const db = extract(DB);
 
 registerRoutes(router);
 
+app.use(
+  cors({
+    credentials: true,
+  })
+);
+app.use(BodyParser());
 app.use(overrideContext);
 app.use(router.routes());
 
-export const bootstrap = (port: number) =>
+export const bootstrap = async (port: number) => {
+  try {
+    await db.connect();
+  } catch (e) {
+    console.error(
+      "Cannot connect to the database, please check the config of connection.",
+      e
+    );
+
+    return;
+  }
+
   app.listen(port, () => console.info(`Listening on ${port}`));
+};
