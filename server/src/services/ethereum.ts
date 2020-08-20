@@ -12,11 +12,7 @@ export class Ethereum {
   }
 
   createAccount(userName: string, password: string) {
-    const account = new Account(userName, password);
-
-    account.create(this.RPC);
-
-    return account;
+    return new Account(userName, password).create(this.RPC);
   }
 
   unlockAccount(userName: string, password: string) {

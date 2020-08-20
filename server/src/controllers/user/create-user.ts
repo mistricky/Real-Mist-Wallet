@@ -9,18 +9,20 @@ interface CreateUserPayload {
   passwordPromptInfo: string;
 }
 
-export function handleCreateUser(ctx: Context) {
+export async function handleCreateUser(ctx: Context) {
   const ETH = extract(Ethereum);
   const { idName, password, passwordPromptInfo } = ctx.request
     .body as CreateUserPayload;
-  const account = ETH.createAccount(idName, password);
+  const account = await ETH.createAccount(idName, password);
 
   account.setPasswordPromptInfo(passwordPromptInfo);
 
   try {
-    account.save();
+    await account.save();
 
-    ctx.success();
+    ctx.success({
+      mnemonic: account.mnemonic,
+    });
   } catch (e) {
     console.error(e);
     ctx.error(new HTTPResponseError("Create user failure", 403));

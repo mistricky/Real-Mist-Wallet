@@ -5,12 +5,15 @@ import { User } from "../models/user.model";
 import { Eth } from "web3-eth";
 import { HTTPResponseError } from "../response/error";
 import Web3 from "web3";
+import * as BIP39 from "bip39";
+import * as BIP32 from "bip32";
 
 export class Account {
-  private _ETHAccount: ETHAccount | undefined;
-  private _RPC: Eth | undefined;
+  private _ETHAccount?: ETHAccount;
+  private _RPC?: Eth;
   private _keyStore: any;
   private passwordPromptInfo = "";
+  private _mnemonic?: string;
 
   private registry = extract(DB).conn.getRepository(User);
 
@@ -32,6 +35,10 @@ export class Account {
 
   // input account information
   constructor(private _userName: string, private _password: string) {}
+
+  get mnemonic() {
+    return this._mnemonic;
+  }
 
   get userName() {
     return this._userName;
@@ -55,17 +62,30 @@ export class Account {
     return this._keyStore;
   }
 
+  get privateKey() {
+    return this.ETHAccount.privateKey;
+  }
+
   setPasswordPromptInfo(info: string) {
     this.passwordPromptInfo = info;
   }
 
   // create a new account
-  create(RPC: Eth) {
-    this._ETHAccount = RPC.accounts.create(this.password);
+  async create(RPC: Eth) {
+    const mnemonic = BIP39.generateMnemonic();
+    const seed = await BIP39.mnemonicToSeed(mnemonic);
+
+    this._ETHAccount = RPC.accounts.privateKeyToAccount(
+      BIP32.fromSeed(seed)
+        .derivePath("m/44'/60'/0'/0/0")
+        .privateKey!.toString("hex")
+    );
+
+    this._mnemonic = mnemonic;
     this._keyStore = this._ETHAccount.encrypt(this.password);
     this._RPC = RPC;
 
-    return this.ETHAccount;
+    return this;
   }
 
   // unlock the account by keyStore
@@ -79,10 +99,11 @@ export class Account {
     }
 
     this._RPC = RPC;
+    this._keyStore = users[0].keyStore;
 
     try {
       this._ETHAccount = RPC.accounts.decrypt(
-        JSON.parse(users[0].keyStore),
+        JSON.parse(this._keyStore),
         this.password
       );
     } catch (e) {
@@ -94,6 +115,8 @@ export class Account {
 
   save() {
     const user = new User();
+
+    console.info(this._userName, this._keyStore, this.passwordPromptInfo);
 
     user.userName = this._userName;
     user.keyStore = this._keyStore;
