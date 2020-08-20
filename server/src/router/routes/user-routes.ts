@@ -5,7 +5,7 @@ import { recoverUser } from "../../controllers/user/recover-user";
 import { getUserInfos } from "../../controllers/user/get-user-infos";
 import { extract } from "@wizardoc/injector";
 import { Auth } from "../../services/auth";
-import { HTTPResponseError } from "../../response/error";
+import { transfer } from "../../controllers/user/transfer";
 
 export function userRoutes(router: Router<any, Context>) {
   const auth = extract(Auth);
@@ -14,5 +14,6 @@ export function userRoutes(router: Router<any, Context>) {
     .prefix("/user")
     .post("/", handleCreateUser)
     .put("/recover", recoverUser)
-    .get("/", auth.validation, getUserInfos);
+    .get("/", auth.validation, getUserInfos)
+    .put("/transfer", auth.validation, transfer);
 }
