@@ -7,7 +7,6 @@
   } from "carbon-components-svelte";
   import { dialogs } from "../../services/dialog-service.svelte";
 
-  let onClose = () => {};
   let submitConfig = {
     text: "确认",
     onClose: () => {},

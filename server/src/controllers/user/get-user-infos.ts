@@ -8,8 +8,6 @@ export async function getUserInfos(ctx: Context) {
   const account = await extract(Ethereum).unlockAccount(idName, password);
   const balance = await account.getBalance();
 
-  console.info(account.keyStore);
-
   ctx.success({
     idName,
     balance,
