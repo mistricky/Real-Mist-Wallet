@@ -12,8 +12,8 @@ export interface JWTPayload {
 
 @Injectable()
 export class Auth {
-  signToken(idName: string): string {
-    return JWT.sign({ idName }, SECRET_KEY);
+  signToken(idName: string, password: string): string {
+    return JWT.sign({ idName, password }, SECRET_KEY);
   }
 
   verify(token: string) {
