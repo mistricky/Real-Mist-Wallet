@@ -7,6 +7,11 @@
     "@koa/cors": "^3.1.0",
     "@types/node": "^14.0.27",
     "@wizardoc/injector": "^1.2.3",
+    "bip32": "^2.0.5",
+    "bip39": "^3.0.2",
+    "ethereumjs-tx": "^2.1.2",
+    "ethereumjs-util": "^7.0.4",
+    "ethereumjs-wallet": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.0",
     "koa-body": "^4.2.0",
@@ -16,7 +21,8 @@
     "pg": "^8.3.0",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.25",
-    "typescript": "^3.9.7"
+    "typescript": "^3.9.7",
+    "web3": "^1.2.11"
   },
   "scripts": {
     "watch": "tsc --watch",
