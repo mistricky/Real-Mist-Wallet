@@ -70,9 +70,8 @@ export class Account {
     this.passwordPromptInfo = info;
   }
 
-  // create a new account
-  async create(RPC: Eth) {
-    const mnemonic = BIP39.generateMnemonic();
+  // restore identity
+  async restore(RPC: Eth, mnemonic: string) {
     const seed = await BIP39.mnemonicToSeed(mnemonic);
 
     this._ETHAccount = RPC.accounts.privateKeyToAccount(
@@ -86,6 +85,13 @@ export class Account {
     this._RPC = RPC;
 
     return this;
+  }
+
+  // create a new account
+  create(RPC: Eth) {
+    const mnemonic = BIP39.generateMnemonic();
+
+    return this.restore(RPC, mnemonic);
   }
 
   // unlock the account by keyStore

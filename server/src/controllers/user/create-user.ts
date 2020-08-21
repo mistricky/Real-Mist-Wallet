@@ -2,6 +2,7 @@ import { Context } from "../../response/res";
 import { extract } from "@wizardoc/injector";
 import { Ethereum } from "../../services";
 import { HTTPResponseError } from "../../response/error";
+import { Auth } from "../../services/auth";
 
 interface CreateUserPayload {
   idName: string;
@@ -21,6 +22,7 @@ export async function handleCreateUser(ctx: Context) {
     await account.save();
 
     ctx.success({
+      token: extract(Auth).signToken(idName, password),
       mnemonic: account.mnemonic,
     });
   } catch (e) {

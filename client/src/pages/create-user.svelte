@@ -39,15 +39,8 @@
 
     result
       .expect(() => "创建用户失败，请检查网络后重试")
-      .success(async ({ mnemonic }) => {
+      .success(async ({ mnemonic, token }) => {
         await cache.setItem("mnemonic", mnemonic);
-      });
-
-    const recoverRes = await httpService.put("/user/recover", formData);
-
-    recoverRes
-      .expect(() => {})
-      .success(async ({ token }) => {
         await cache.setItem(JWT_TOKEN_KEY, token);
         await getUserInfo(true);
 

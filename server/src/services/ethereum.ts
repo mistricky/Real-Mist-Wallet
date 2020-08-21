@@ -24,6 +24,10 @@ export class Ethereum {
     this.RPC = web3.instance.eth;
   }
 
+  restoreAccount(userName: string, password: string, mnemonic: string) {
+    return new Account(userName, password).restore(this.RPC, mnemonic);
+  }
+
   createAccount(userName: string, password: string) {
     return new Account(userName, password).create(this.RPC);
   }
