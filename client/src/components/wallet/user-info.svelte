@@ -9,19 +9,27 @@
   } from "carbon-components-svelte";
   import { open } from "../../services/dialog-service.svelte";
   import ExposePrivateKey from "./dialogs/expose-private-key.svelte";
-  import ExposeKeystore from "./dialogs/expose-keystore.svelte";
   import ExposeMnemonic from "./dialogs/expose-mnemonic.svelte";
+  import { userInfo } from "../../services/user-service.svelte";
+  import { httpService } from "../../services/http-service";
 
-  let userInfo = {
-    idName: "",
-    balance: 0,
-    address: "",
-    keyStore: {},
-  };
-  let keyStoreURL = "";
+  // let userInfo = {
+  //   idName: "",
+  //   balance: 0,
+  //   address: "",
+  //   keyStore: {},
+  // };
+  // let keyStoreURL = "";
+
+  let keyStore = {};
 
   onMount(async () => {
-    userInfo = await cache.getItem(USER_INFO_KEY);
+    const res = await httpService.get("/user/keystore");
+
+    res
+      .expect(() => "获取 keystore 失败，请检查网络后重试")
+      .success((data) => (keyStore = data.keyStore));
+
     console.info(userInfo);
   });
 
@@ -40,7 +48,7 @@
   }
 
   $: keyStoreURL = URL.createObjectURL(
-    new Blob([userInfo.keyStore], {
+    new Blob([keyStore], {
       type: "application/json",
     })
   );
@@ -72,11 +80,11 @@
 <div class="wrapper">
   <div class="container">
     <div class="balance-info">
-      <div class="balance">{userInfo.balance} ETH</div>
-      <div class="id-name">{userInfo.idName}</div>
+      <div class="balance">{$userInfo.balance} ETH</div>
+      <div class="id-name">{$userInfo.idName}</div>
     </div>
     <div class="addr">
-      {userInfo.address}
+      {$userInfo.address}
       <OverflowMenu>
         <OverflowMenuItem on:click={exposePrivatekey}>
           导出私钥

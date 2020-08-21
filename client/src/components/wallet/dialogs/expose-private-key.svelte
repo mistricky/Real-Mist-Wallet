@@ -16,9 +16,13 @@
   };
 
   onMount(async () => {
-    const info = await cache.getItem(USER_INFO_KEY);
+    const result = await httpService.get("/user/private-key");
 
-    privateKey = info.privateKey;
+    result
+      .expect(() => "获取私钥失败，请检查网络后重试")
+      .success((data) => (privateKey = data.privateKey));
+
+    // privateKey = info.privateKey;
   });
 </script>
 

@@ -1,13 +1,10 @@
 <script lang="ts">
+  import { navigate } from "svelte-routing";
   import Card from "../components/common/card.svelte";
-  import {
-    TextInput,
-    Form,
-    FormItem,
-    Button,
-    Table,
-  } from "carbon-components-svelte";
+  import { TextInput, Button } from "carbon-components-svelte";
   import { httpService } from "../services/http-service";
+  import { cache, USER_INFO_KEY, JWT_TOKEN_KEY } from "../services/cache";
+  import { getUserInfo } from "../services/user-service.svelte";
 
   interface MetaFormData {
     [fieldName: string]: FormItemData;
@@ -36,9 +33,26 @@
       {}
     );
 
-  function handleSubmitClick() {
-    console.info(convertFormData(metaFormData));
-    httpService.post("/user", convertFormData(metaFormData));
+  async function handleSubmitClick() {
+    const formData: FormData = convertFormData(metaFormData);
+    const result = await httpService.post("/user", formData);
+
+    result
+      .expect(() => "创建用户失败，请检查网络后重试")
+      .success(async ({ mnemonic }) => {
+        await cache.setItem("mnemonic", mnemonic);
+      });
+
+    const recoverRes = await httpService.put("/user/recover", formData);
+
+    recoverRes
+      .expect(() => {})
+      .success(async ({ token }) => {
+        await cache.setItem(JWT_TOKEN_KEY, token);
+        await getUserInfo(true);
+
+        navigate("/user/mnemonic");
+      });
   }
 </script>
 
