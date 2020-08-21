@@ -7,6 +7,8 @@
 </script>
 
 <Router>
+  <!-- Missing redirect so patch it -->
+  <Route path="/" component={Home} />
   <Route path="/home" component={Home} />
   <UserRoutes />
   <Route path="/wallet" component={Wallet} />
