@@ -1,10 +1,5 @@
 <script>
-  import {
-    Modal,
-    ModalBody,
-    ModalHeader,
-    ModalFooter,
-  } from "carbon-components-svelte";
+  import { Modal } from "carbon-components-svelte";
   import { dialogs } from "../../services/dialog-service.svelte";
 
   let submitConfig = {
@@ -24,7 +19,13 @@
     secondaryButtonText={cancelConfig.text}
     primaryButtonText={submitConfig.text}
     on:click:button--secondary={() => componentProps.close(cancelConfig.onClose())}
-    on:submit={() => componentProps.close(submitConfig.onClose())}>
+    on:submit={() => {
+      if (submitConfig.keepDialog) {
+        submitConfig.onClose();
+        return;
+      }
+      componentProps.close(submitConfig.onClose());
+    }}>
     <svelte:component
       this={content}
       bind:submitConfig
