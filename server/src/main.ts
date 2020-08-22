@@ -7,12 +7,18 @@ import BodyParser from "koa-bodyparser";
 import cors from "@koa/cors";
 import { extract } from "@wizardoc/injector";
 import { DB } from "./db/connections";
+import { createReadStream } from "fs";
+import Path from "path";
+import Static from "koa-static";
 
 const app = new Koa<any, Context>();
 const router = new Router<any, Context>();
-const db = extract(DB);
+
+const PUBLIC_PATH = Path.join(__dirname, "../public");
 
 registerRoutes(router);
+
+app.use(Static(PUBLIC_PATH));
 
 app.use(
   cors({
@@ -23,9 +29,14 @@ app.use(BodyParser());
 app.use(overrideContext);
 app.use(router.routes());
 
+app.use((ctx) => {
+  ctx.set("Content-Type", "text/html;charset=utf-8");
+  ctx.body = createReadStream(Path.join(PUBLIC_PATH, "index.html"));
+});
+
 export const bootstrap = async (port: number) => {
   try {
-    await db.connect();
+    await extract(DB).connect();
   } catch (e) {
     console.error(
       "Cannot connect to the database, please check the config of connection.",
