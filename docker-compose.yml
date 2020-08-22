@@ -8,5 +8,10 @@ services:
       POSTGRES_USER: mist
       POSTGRES_DB: mist_wallet
       POSTGRES_PASSWORD: 123
+  wallet:
+    image: "mist_wallet"
+    restart: always
     ports:
-      - "5434:5432"
+      - "9999:9999"
+    environment:
+      WAIT_HOSTS: postgres:5432
